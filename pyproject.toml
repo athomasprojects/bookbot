@@ -5,7 +5,9 @@ description = "Add your description here"
 authors = [
     { name = "Amanda Thomas", email = "amanda.thomas14@gmail.com" }
 ]
-dependencies = []
+dependencies = [
+    "ipython>=8.22.2",
+]
 readme = "README.md"
 requires-python = ">= 3.8"
 
@@ -16,6 +18,9 @@ build-backend = "hatchling.build"
 [tool.rye]
 managed = true
 dev-dependencies = []
+
+[tool.rye.scripts]
+book = "python ./src/bookbot/main.py"
 
 [tool.hatch.metadata]
 allow-direct-references = true
