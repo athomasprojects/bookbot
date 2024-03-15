@@ -1,5 +1,4 @@
 import dataclasses
-import functools
 from collections import OrderedDict
 from enum import Enum
 from pathlib import Path
@@ -32,7 +31,6 @@ class Book:
     def __init__(self, file):
         f = Path(BookDir.DIR.value) / Path(file)
         assert f.exists() and f.is_file()
-        print(str(file))
         self.file = Path(f)
         self.title = file
         self.read_file()
@@ -62,10 +60,10 @@ class Book:
         self.freq = chars
 
     def report(self):
-        s = f"--- Begin report of '{self.title}' ---\n{self.word_count} words found in the document\n\n"
+        s = f"==== Begin report of '{self.title}' ====\n{self.word_count} words found in the document\n\n"
         for k, v in self.freq.items():
-            s += f"The {repr(k) if ':' not in k else k} was found {v} times\n"
-        s += "--- End of report ---\n"
+            s += f"The {repr(k) if ':' not in k else k} character was found {v} times\n"
+        s += "==== End of report ====\n"
         print(s)
 
 
