@@ -24,6 +24,7 @@ def string_of_dict(d):
 @dataclasses.dataclass(slots=True)
 class Book:
     file: Path
+    title: str = dataclasses.field(init=False)
     text: str = dataclasses.field(init=False)
     word_count: int = dataclasses.field(init=False)
     freq: dict = dataclasses.field(init=False)
@@ -33,7 +34,7 @@ class Book:
         assert f.exists() and f.is_file()
         print(str(file))
         self.file = Path(f)
-
+        self.title = file
         self.read_file()
         self.count_words()
         self.count_frequency()
@@ -60,11 +61,19 @@ class Book:
         chars = OrderedDict(sorted(chars.items()))
         self.freq = chars
 
+    def report(self):
+        s = f"--- Begin report of '{self.title}' ---\n{self.word_count} words found in the document\n\n"
+        for k, v in self.freq.items():
+            s += f"The {repr(k) if ':' not in k else k} was found {v} times\n"
+        s += "--- End of report ---\n"
+        print(s)
+
 
 def book():
     file = "frankenstein.txt"
     b = Book(file)
-    print(str(b))
+    # print(str(b))
+    b.report()
 
 
 if __name__ == "__main__":
