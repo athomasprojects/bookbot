@@ -49,9 +49,8 @@ class Book:
         self.word_count = len(self.text.split())
 
     def count_frequency(self):
-        str = self.text.lower()
         chars = {}
-        for c in str:
+        for c in self.text.lower():
             if c not in chars:
                 chars[c] = 1
             else:
